@@ -1,21 +1,21 @@
 #include <Camera.hpp>
 
 Camera::Camera(sf::RenderWindow& renderWindow, Map& map) : m_renderWindow(renderWindow), m_map(map) {
-    m_radius = 5; // Радиус камеры-окружности
+    m_radius = 5; // Р Р°РґРёСѓСЃ РєР°РјРµСЂС‹-РѕРєСЂСѓР¶РЅРѕСЃС‚Рё
     m_camera.setRadius(m_radius);
-    m_camera.setFillColor(sf::Color(0, 255, 0)); // Установка зеленого цвета
+    m_camera.setFillColor(sf::Color(0, 255, 0)); // РЈСЃС‚Р°РЅРѕРІРєР° Р·РµР»РµРЅРѕРіРѕ С†РІРµС‚Р°
     m_camera.setOrigin(sf::Vector2f(m_radius, m_radius));
 
-    m_speedMove = 200.0f; // Скорость движения
-    m_speedAngle = 100.0f; // Скорость поворота
+    m_speedMove = 200.0f; // РЎРєРѕСЂРѕСЃС‚СЊ РґРІРёР¶РµРЅРёСЏ
+    m_speedAngle = 100.0f; // РЎРєРѕСЂРѕСЃС‚СЊ РїРѕРІРѕСЂРѕС‚Р°
 
-    m_position = { 70, 70 }; // Изначальная позиция
+    m_position = { 70, 70 }; // РР·РЅР°С‡Р°Р»СЊРЅР°СЏ РїРѕР·РёС†РёСЏ
 
-    m_fov = 60; // Угол обзора
+    m_fov = 60; // РЈРіРѕР» РѕР±Р·РѕСЂР°
 
-    m_rayLength = 200; // Длина луча
+    m_rayLength = 200; // Р”Р»РёРЅР° Р»СѓС‡Р°
 
-    for (unsigned int i = 0; i < WIDTHSCREEN; i++) { // Установка цвета для лучей
+    for (unsigned int i = 0; i < WIDTHSCREEN; i++) { // РЈСЃС‚Р°РЅРѕРІРєР° С†РІРµС‚Р° РґР»СЏ Р»СѓС‡РµР№
         sf::VertexArray ray(sf::Lines, 2);
         ray[0].color = sf::Color::Red;
         ray[1].color = sf::Color::Red;
@@ -24,7 +24,7 @@ Camera::Camera(sf::RenderWindow& renderWindow, Map& map) : m_renderWindow(render
     }
 }
 
-void Camera::draw() { // Отрисовка камеры
+void Camera::draw() { // РћС‚СЂРёСЃРѕРІРєР° РєР°РјРµСЂС‹
     for (auto& vvec : m_vecRays) {
         m_renderWindow.draw(vvec);
     }
@@ -39,14 +39,14 @@ void Camera::update() {
 
 void Camera::projection() {
     for (unsigned int i = 0; i < m_vecRays.size(); i++) {
-        m_vecRays[i][0].position = m_position; // Начало каждого луча
+        m_vecRays[i][0].position = m_position; // РќР°С‡Р°Р»Рѕ РєР°Р¶РґРѕРіРѕ Р»СѓС‡Р°
 
-        if (Intersect(i)) { // Если луч сталкивается с препятствием, то он урезается
+        if (Intersect(i)) { // Р•СЃР»Рё Р»СѓС‡ СЃС‚Р°Р»РєРёРІР°РµС‚СЃСЏ СЃ РїСЂРµРїСЏС‚СЃС‚РІРёРµРј, С‚Рѕ РѕРЅ СѓСЂРµР·Р°РµС‚СЃСЏ
             m_vecRays[i][1].position = m_intersection;
         }
-        else { // Иначе рассчитываем конец луча
-            m_vecRays[i][1].position = { m_position.x + m_rayLength * dCos((m_angle + m_fov / 2) - i * (m_fov / WIDTHSCREEN)), // Конец луча по X
-                                        m_position.y + m_rayLength * dSin((m_angle + m_fov / 2) - i * (m_fov / WIDTHSCREEN)) }; // Конец луча по Y
+        else { // РРЅР°С‡Рµ СЂР°СЃСЃС‡РёС‚С‹РІР°РµРј РєРѕРЅРµС† Р»СѓС‡Р°
+            m_vecRays[i][1].position = { m_position.x + m_rayLength * dCos((m_angle + m_fov / 2) - i * (m_fov / WIDTHSCREEN)), // РљРѕРЅРµС† Р»СѓС‡Р° РїРѕ X
+                                        m_position.y + m_rayLength * dSin((m_angle + m_fov / 2) - i * (m_fov / WIDTHSCREEN)) }; // РљРѕРЅРµС† Р»СѓС‡Р° РїРѕ Y
         }
     }
 }
@@ -56,7 +56,7 @@ void Camera::checkKeyBoardHit(sf::Time dt) {
         float dx = m_speedMove * cos(m_angle * PI / 180) * dt.asSeconds();
         float dy = m_speedMove * sin(m_angle * PI / 180) * dt.asSeconds();
 
-        // Проверка коллизии при перемещении вперед
+        // РџСЂРѕРІРµСЂРєР° РєРѕР»Р»РёР·РёРё РїСЂРё РїРµСЂРµРјРµС‰РµРЅРёРё РІРїРµСЂРµРґ
         if (!checkCollision(m_position.x + dx, m_position.y)) {
             m_position.x += dx;
         }
@@ -69,7 +69,7 @@ void Camera::checkKeyBoardHit(sf::Time dt) {
         float dx = -m_speedMove * cos(m_angle * PI / 180) * dt.asSeconds();
         float dy = -m_speedMove * sin(m_angle * PI / 180) * dt.asSeconds();
 
-        // Проверка коллизии при перемещении назад
+        // РџСЂРѕРІРµСЂРєР° РєРѕР»Р»РёР·РёРё РїСЂРё РїРµСЂРµРјРµС‰РµРЅРёРё РЅР°Р·Р°Рґ
         if (!checkCollision(m_position.x + dx, m_position.y)) {
             m_position.x += dx;
         }
@@ -106,10 +106,10 @@ void Camera::checkKeyBoardHit(sf::Time dt) {
 }
 
 bool Camera::Intersect(unsigned int it) {
-    float fAngle = (m_angle + m_fov / 2 - it * (m_fov / WIDTHSCREEN)); // Угол направление луча от камеры 
-    sf::Vector2f direction = { dCos(fAngle), dSin(fAngle) }; // Направление луча
+    float fAngle = (m_angle + m_fov / 2 - it * (m_fov / WIDTHSCREEN)); // РЈРіРѕР» РЅР°РїСЂР°РІР»РµРЅРёРµ Р»СѓС‡Р° РѕС‚ РєР°РјРµСЂС‹ 
+    sf::Vector2f direction = { dCos(fAngle), dSin(fAngle) }; // РќР°РїСЂР°РІР»РµРЅРёРµ Р»СѓС‡Р°
 
-    for (unsigned int i = 0; i < m_rayLength; i++) { // Проходим по длине лучей
+    for (unsigned int i = 0; i < m_rayLength; i++) { // РџСЂРѕС…РѕРґРёРј РїРѕ РґР»РёРЅРµ Р»СѓС‡РµР№
         int dx = static_cast<int>(m_position.x + i * direction.x);
         int dy = static_cast<int>(m_position.y + i * direction.y);
 
@@ -121,7 +121,7 @@ bool Camera::Intersect(unsigned int it) {
     }
     return false;
 }
-bool Camera::checkCollision(float x, float y) { // Есть ли блок в точке
+bool Camera::checkCollision(float x, float y) { // Р•СЃС‚СЊ Р»Рё Р±Р»РѕРє РІ С‚РѕС‡РєРµ
     unsigned int dx = static_cast<unsigned int>(x / BlockSize);
     unsigned int dy = static_cast<unsigned int>(y / BlockSize);
 
