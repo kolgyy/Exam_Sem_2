@@ -25,7 +25,7 @@ public:
     bool Intersect(unsigned int it);
     bool checkCollision(float x, float y);
 
-    inline float toRadian(float degree) { return (PI / 180) * degree; } // Перевод градусов в радианы
-    inline float dCos(float degree) { return cos(toRadian(degree)); } // Получение косинуса от радиан
-    inline float dSin(float degree) { return sin(toRadian(degree)); }// Получение синуса от радиан
+    inline float toRadian(float degree) { return (PI / 180) * degree; } // РџРµСЂРµРІРѕРґ РіСЂР°РґСѓСЃРѕРІ РІ СЂР°РґРёР°РЅС‹
+    inline float dCos(float degree) { return cos(toRadian(degree)); } // РџРѕР»СѓС‡РµРЅРёРµ РєРѕСЃРёРЅСѓСЃР° РѕС‚ СЂР°РґРёР°РЅ
+    inline float dSin(float degree) { return sin(toRadian(degree)); }// РџРѕР»СѓС‡РµРЅРёРµ СЃРёРЅСѓСЃР° РѕС‚ СЂР°РґРёР°РЅ
 };
