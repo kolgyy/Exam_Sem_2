@@ -3,12 +3,12 @@
 #include <math.h>
 
 #define PI 3.1415f
-#define xCase 20 // ���-�� ������ �� Y
-#define yCase 15 // ���-�� ������ �� X
-#define BlockSize 32 // ������ �����
+#define xCase 20 // Кол-во блоков по Y
+#define yCase 15 // Кол-во блоков по X
+#define BlockSize 32 // Размер блока
 
-const unsigned int WIDTHSCREEN = xCase * BlockSize; // ������ ������
-const unsigned int HEIGHTSCREEN = yCase * BlockSize; // ������ ������
+const unsigned int WIDTHSCREEN = xCase * BlockSize; // Ширина экрана
+const unsigned int HEIGHTSCREEN = yCase * BlockSize; // Высота экрана
 
 
 class Map {
@@ -21,7 +21,7 @@ public:
     Map(sf::RenderWindow& renderWindow) : m_renderWindow(renderWindow) {
         m_vecMap =
         {
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // ��������� �����
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // Построение карты
             {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
             {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
             {1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1},
@@ -41,8 +41,8 @@ public:
         for (unsigned int y = 0; y < yCase; y++) {
             for (unsigned int x = 0; x < xCase; x++) {
                 if (m_vecMap[y][x]) {
-                    sf::RectangleShape box(sf::Vector2f(BlockSize, BlockSize)); // �������������� ���� � �����
-                    box.setPosition(sf::Vector2f(x * BlockSize, y * BlockSize)); // ���������� ������ �� ������
+                    sf::RectangleShape box(sf::Vector2f(BlockSize, BlockSize)); // Преобразование цифр в блоки
+                    box.setPosition(sf::Vector2f(x * BlockSize, y * BlockSize)); // Размещение блоков на экране
                     m_vecBox.push_back(box);
                 }
             }
@@ -83,21 +83,21 @@ protected:
 
 public:
     Camera(sf::RenderWindow& renderWindow, Map& map) : m_renderWindow(renderWindow), m_map(map) {
-        m_radius = 5; // ������������� ������ ������-����������
+        m_radius = 5; // Радиус камеры-окружности
         m_camera.setRadius(m_radius);
-        m_camera.setFillColor(sf::Color(0, 255, 0)); // ������������ ������� ����
+        m_camera.setFillColor(sf::Color(0, 255, 0)); // Установка зеленого цвета
         m_camera.setOrigin(sf::Vector2f(m_radius, m_radius));
 
-        m_speedMove = 200.0f; // �������� ��������
-        m_speedAngle = 100.0f; // �������� ��������
+        m_speedMove = 200.0f; // Скорость движения
+        m_speedAngle = 100.0f; // Скорость поворота
 
-        m_position = { 70, 70 }; // ����������� ������� 
+        m_position = { 70, 70 }; // Изначальная позиция
 
-        m_fov = 60; // ���� ������
+        m_fov = 60; // Угол обзора
 
-        m_rayLength = 200; // ����� ����
+        m_rayLength = 200; // Длина луча
 
-        for (unsigned int i = 0; i < WIDTHSCREEN; i++) { // ��������� ����� ��� �����
+        for (unsigned int i = 0; i < WIDTHSCREEN; i++) { // Установка цвета для лучей
             sf::VertexArray ray(sf::Lines, 2);
             ray[0].color = sf::Color::Red;
             ray[1].color = sf::Color::Red;
@@ -107,7 +107,7 @@ public:
 
 
     }
-    void draw() { // ��������� ������ � ����� �� ������
+    void draw() { // Отрисовка камеры и лучей от неё
         for (auto& vvec : m_vecRays) {
             m_renderWindow.draw(vvec);
         }
@@ -121,12 +121,12 @@ public:
     }
     void projection() {
         for (unsigned int i = 0; i < m_vecRays.size(); i++) {
-            m_vecRays[i][0].position = m_position; // ������ ������� ����
+            m_vecRays[i][0].position = m_position; // Начало каждого луча
 
-            if (Intersect(i)) { // ���� ���������� ������, �� ������ ����� ����
+            if (Intersect(i)) { // Если луч сталкивается с препятствием, то он урезается
                 m_vecRays[i][1].position = m_intersection;
             }
-            else { // ���� ���, �� ������������ ������
+            else { // Иначе рассчитываем конец луча
                 m_vecRays[i][1].position = { m_position.x + m_rayLength * dCos((m_angle + m_fov / 2) - i * (m_fov / WIDTHSCREEN)), // ����� ���� �� X
                                             m_position.y + m_rayLength * dSin((m_angle + m_fov / 2) - i * (m_fov / WIDTHSCREEN)) }; // ����� ����� �� Y
             }
@@ -134,18 +134,18 @@ public:
     }
 
     void checkKeyBoardHit(sf::Time dt) {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { // �������� ������
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { // Движение вперед
             m_position.x += dCos(m_angle) * m_speedMove * dt.asSeconds();
             m_position.y += dSin(m_angle) * m_speedMove * dt.asSeconds();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { // �������� �����
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { // Движение назад
             m_position.x -= dCos(m_angle) * m_speedMove * dt.asSeconds();
             m_position.y -= dSin(m_angle) * m_speedMove * dt.asSeconds();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { // ������� ������
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { // Поворот налево
             m_angle -= m_speedAngle * dt.asSeconds();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { // ������� �������
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { // Поворот направо
             m_angle += m_speedAngle * dt.asSeconds();
         }
 
@@ -176,9 +176,9 @@ public:
 
 
 
-    inline float toRadian(float degree) { return (PI / 180) * degree; } // ������� �������� � �������
-    inline float dCos(float degree) { return cos(toRadian(degree)); } // ��������� �������� �� ������
-    inline float dSin(float degree) { return sin(toRadian(degree)); }// ��������� ������ �� ������
+    inline float toRadian(float degree) { return (PI / 180) * degree; } // Перевод градусов в радианы
+    inline float dCos(float degree) { return cos(toRadian(degree)); } // Получение косинуса от радиан
+    inline float dSin(float degree) { return sin(toRadian(degree)); }// Получение синуса от радиан
 };
 
 
@@ -188,7 +188,7 @@ public:
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(WIDTHSCREEN, HEIGHTSCREEN), "ray-cast scene");
-    window.setFramerateLimit(60); // ������������� 60 ������
+    window.setFramerateLimit(60); // Установка 60 кадров в сек.
     
     Map map(window);
     Camera camera(window, map);
