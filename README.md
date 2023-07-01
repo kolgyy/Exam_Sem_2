@@ -12,7 +12,7 @@ a Ray-casting scene
 -Лицезреть увиденное
 
 #For Editors:
--Был использован C++
--Библиотека SFML
--Научные форумы
--Visual Studio 2022
+-     Был использован C++
+-     Библиотека SFML
+ -     Научные форумы
+-      Visual Studio 2022
