@@ -3,12 +3,12 @@
 #include <math.h>
 
 #define PI 3.1415f
-#define xCase 20 // Кол-во блоков по Y
-#define yCase 15 // Кол-во блоков по X
-#define BlockSize 32 // Размер блока
+#define xCase 20 // пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Y
+#define yCase 15 // пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ X
+#define BlockSize 32 // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-const unsigned int WIDTHSCREEN = xCase * BlockSize; // Ширина экрана
-const unsigned int HEIGHTSCREEN = yCase * BlockSize; // Высота экрана
+const unsigned int WIDTHSCREEN = xCase * BlockSize; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+const unsigned int HEIGHTSCREEN = yCase * BlockSize; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 
 class Map {
@@ -21,7 +21,7 @@ public:
     Map(sf::RenderWindow& renderWindow) : m_renderWindow(renderWindow) {
         m_vecMap =
         {
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // Отрисовка карты
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
             {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
             {1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1},
@@ -41,8 +41,8 @@ public:
         for (unsigned int y = 0; y < yCase; y++) {
             for (unsigned int x = 0; x < xCase; x++) {
                 if (m_vecMap[y][x]) {
-                    sf::RectangleShape box(sf::Vector2f(BlockSize, BlockSize)); // Преобразование цифр в блоки
-                    box.setPosition(sf::Vector2f(x * BlockSize, y * BlockSize)); // Размещение блоков на экране
+                    sf::RectangleShape box(sf::Vector2f(BlockSize, BlockSize)); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
+                    box.setPosition(sf::Vector2f(x * BlockSize, y * BlockSize)); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                     m_vecBox.push_back(box);
                 }
             }
@@ -83,21 +83,21 @@ protected:
 
 public:
     Camera(sf::RenderWindow& renderWindow, Map& map) : m_renderWindow(renderWindow), m_map(map) {
-        m_radius = 5; // Устанавливаем радиус камеры-окружности
+        m_radius = 5; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         m_camera.setRadius(m_radius);
-        m_camera.setFillColor(sf::Color(0, 255, 0)); // Устаналиваем зеленый цвет
+        m_camera.setFillColor(sf::Color(0, 255, 0)); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         m_camera.setOrigin(sf::Vector2f(m_radius, m_radius));
 
-        m_speedMove = 200.0f; // Скорость движения
-        m_speedAngle = 100.0f; // Скорость поворота
+        m_speedMove = 200.0f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        m_speedAngle = 100.0f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-        m_position = { 70, 70 }; // Изначальная позиция 
+        m_position = { 70, 70 }; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 
-        m_fov = 60; // Угол обзора
+        m_fov = 60; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-        m_rayLength = 200; // Длина луча
+        m_rayLength = 200; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
-        for (unsigned int i = 0; i < WIDTHSCREEN; i++) { // Установка цвета для лучей
+        for (unsigned int i = 0; i < WIDTHSCREEN; i++) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             sf::VertexArray ray(sf::Lines, 2);
             ray[0].color = sf::Color::Red;
             ray[1].color = sf::Color::Red;
@@ -107,7 +107,7 @@ public:
 
 
     }
-    void draw() { // Отрисовка камеры и лучей от камеры
+    void draw() { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         for (auto& vvec : m_vecRays) {
             m_renderWindow.draw(vvec);
         }
@@ -121,31 +121,31 @@ public:
     }
     void projection() {
         for (unsigned int i = 0; i < m_vecRays.size(); i++) {
-            m_vecRays[i][0].position = m_position; // Начало каждого луча
+            m_vecRays[i][0].position = m_position; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
-            if (Intersect(i)) { // Если пересекает объект, то меняет длину луча
+            if (Intersect(i)) { // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 m_vecRays[i][1].position = m_intersection;
             }
-            else { // Если нет, то отрисовываем прямым
-                m_vecRays[i][1].position = { m_position.x + m_rayLength * dCos((m_angle + m_fov / 2) - i * (m_fov / WIDTHSCREEN)), // Конец луча по X
-                                            m_position.y + m_rayLength * dSin((m_angle + m_fov / 2) - i * (m_fov / WIDTHSCREEN)) }; // Конец лучка по Y
+            else { // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+                m_vecRays[i][1].position = { m_position.x + m_rayLength * dCos((m_angle + m_fov / 2) - i * (m_fov / WIDTHSCREEN)), // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ X
+                                            m_position.y + m_rayLength * dSin((m_angle + m_fov / 2) - i * (m_fov / WIDTHSCREEN)) }; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Y
             }
         }
     }
 
     void checkKeyBoardHit(sf::Time dt) {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { // Движение вперед
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             m_position.x += dCos(m_angle) * m_speedMove * dt.asSeconds();
             m_position.y += dSin(m_angle) * m_speedMove * dt.asSeconds();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { // Движение назад
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             m_position.x -= dCos(m_angle) * m_speedMove * dt.asSeconds();
             m_position.y -= dSin(m_angle) * m_speedMove * dt.asSeconds();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { // Поворот налево
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             m_angle -= m_speedAngle * dt.asSeconds();
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { // Поворот направо
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             m_angle += m_speedAngle * dt.asSeconds();
         }
 
@@ -176,9 +176,9 @@ public:
 
 
 
-    inline float toRadian(float degree) { return (PI / 180) * degree; } // Перевод градусов в радианы
-    inline float dCos(float degree) { return cos(toRadian(degree)); } // Получение косинуса от радиан
-    inline float dSin(float degree) { return sin(toRadian(degree)); }// Получение синуса от радиан
+    inline float toRadian(float degree) { return (PI / 180) * degree; } // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    inline float dCos(float degree) { return cos(toRadian(degree)); } // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    inline float dSin(float degree) { return sin(toRadian(degree)); }// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 };
 
 
@@ -188,7 +188,7 @@ public:
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(WIDTHSCREEN, HEIGHTSCREEN), "ray-cast scene");
-    window.setFramerateLimit(60); // Устанавливаем 60 кадров
+    window.setFramerateLimit(60); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 60 пїЅпїЅпїЅпїЅпїЅпїЅ
     
     Map map(window);
     Camera camera(window, map);
