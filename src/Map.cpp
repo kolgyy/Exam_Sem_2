@@ -3,7 +3,7 @@
 Map::Map(sf::RenderWindow& renderWindow) : m_renderWindow(renderWindow) {
     m_vecMap =
     {
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // Построение карты
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, // РџРѕСЃС‚СЂРѕРµРЅРёРµ РєР°СЂС‚С‹
         {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
         {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
         {1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1},
@@ -23,21 +23,21 @@ Map::Map(sf::RenderWindow& renderWindow) : m_renderWindow(renderWindow) {
     for (unsigned int y = 0; y < yCase; y++) {
         for (unsigned int x = 0; x < xCase; x++) {
             if (m_vecMap[y][x]) {
-                sf::RectangleShape box(sf::Vector2f(BlockSize, BlockSize)); // Преобразование цифр в блоки
-                box.setPosition(sf::Vector2f(x * BlockSize, y * BlockSize)); // Размещение блоков на экране
+                sf::RectangleShape box(sf::Vector2f(BlockSize, BlockSize)); // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ С†РёС„СЂ РІ Р±Р»РѕРєРё
+                box.setPosition(sf::Vector2f(x * BlockSize, y * BlockSize)); // Р Р°Р·РјРµС‰РµРЅРёРµ Р±Р»РѕРєРѕРІ РЅР° СЌРєСЂР°РЅРµ
                 m_vecBox.push_back(box);
             }
         }
     }
 }
 
-void Map::draw() { // Отрисовываем карту
+void Map::draw() { //  РћС‚СЂРёСЃРѕРІС‹РІР°РµРј РєР°СЂС‚Сѓ
     for (auto& vvec : m_vecBox) {
         m_renderWindow.draw(vvec);
     }
 }
 
-bool Map::checkMapCase(unsigned int dx, unsigned int dy) { // Проверка, есть ли блок в ячейке
+bool Map::checkMapCase(unsigned int dx, unsigned int dy) { //РџСЂРѕРІРµСЂРєР°, РµСЃС‚СЊ Р»Рё Р±Р»РѕРє РІ СЏС‡РµР№РєРµ
     if (m_vecMap[dy][dx]) {
         return true;
     }
