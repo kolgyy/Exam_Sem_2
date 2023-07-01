@@ -24,7 +24,7 @@ Camera::Camera(sf::RenderWindow& renderWindow, Map& map) : m_renderWindow(render
     }
 }
 
-void Camera::draw() {
+void Camera::draw() { // Отрисовка камеры
     for (auto& vvec : m_vecRays) {
         m_renderWindow.draw(vvec);
     }
@@ -106,10 +106,10 @@ void Camera::checkKeyBoardHit(sf::Time dt) {
 }
 
 bool Camera::Intersect(unsigned int it) {
-    float fAngle = (m_angle + m_fov / 2 - it * (m_fov / WIDTHSCREEN));
-    sf::Vector2f direction = { dCos(fAngle), dSin(fAngle) };
+    float fAngle = (m_angle + m_fov / 2 - it * (m_fov / WIDTHSCREEN)); // Угол направление луча от камеры 
+    sf::Vector2f direction = { dCos(fAngle), dSin(fAngle) }; // Направление луча
 
-    for (unsigned int i = 0; i < m_rayLength; i++) {
+    for (unsigned int i = 0; i < m_rayLength; i++) { // Проходим по длине лучей
         int dx = static_cast<int>(m_position.x + i * direction.x);
         int dy = static_cast<int>(m_position.y + i * direction.y);
 
@@ -121,7 +121,7 @@ bool Camera::Intersect(unsigned int it) {
     }
     return false;
 }
-bool Camera::checkCollision(float x, float y) {
+bool Camera::checkCollision(float x, float y) { // Есть ли блок в точке
     unsigned int dx = static_cast<unsigned int>(x / BlockSize);
     unsigned int dy = static_cast<unsigned int>(y / BlockSize);
 

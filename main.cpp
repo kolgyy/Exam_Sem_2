@@ -7,6 +7,7 @@
 
 int main()
 {
+    logging::Logger logger("log.txt", logging::LogLevel::Debug); // Создание объект класса и уровнем логирования debug
     sf::Music music;
 
     try {
@@ -21,6 +22,7 @@ int main()
     }
     catch (const std::exception& ex) {
         std::cerr << "An exception occurred: " << ex.what() << std::endl;
+        logger.log(ex.what());
     }
 
     sf::RenderWindow window(sf::VideoMode(WIDTHSCREEN, HEIGHTSCREEN), "ray-cast scene");

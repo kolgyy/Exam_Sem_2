@@ -31,13 +31,13 @@ Map::Map(sf::RenderWindow& renderWindow) : m_renderWindow(renderWindow) {
     }
 }
 
-void Map::draw() {
+void Map::draw() { // Отрисовываем карту
     for (auto& vvec : m_vecBox) {
         m_renderWindow.draw(vvec);
     }
 }
 
-bool Map::checkMapCase(unsigned int dx, unsigned int dy) {
+bool Map::checkMapCase(unsigned int dx, unsigned int dy) { // Проверка, есть ли блок в ячейке
     if (m_vecMap[dy][dx]) {
         return true;
     }

@@ -38,4 +38,5 @@ target_link_libraries("${PROJECT_NAME}" sfml-graphics-s-d
 						  vorbis
 						  ogg)
 file(COPY "assets" DESTINATION "/")
+file(COPY "openal32.dll" DESTINATION "/")
 					
