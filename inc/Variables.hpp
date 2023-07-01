@@ -1,9 +1,9 @@
 #pragma once
 
 #define PI 3.1415f
-#define xCase 20 // Кол-во блоков по Y
-#define yCase 15 // Кол-во блоков по X
-#define BlockSize 32 // Размер блока
+#define xCase 20 // РљРѕР»-РІРѕ Р±Р»РѕРєРѕРІ РїРѕ Y
+#define yCase 15 // РљРѕР»-РІРѕ Р±Р»РѕРєРѕРІ РїРѕ X
+#define BlockSize 32 // Р Р°Р·РјРµСЂ Р±Р»РѕРєР°
 
-const unsigned int WIDTHSCREEN = xCase * BlockSize; // Ширина экрана
-const unsigned int HEIGHTSCREEN = yCase * BlockSize; // Высота экрана
+const unsigned int WIDTHSCREEN = xCase * BlockSize; //  РЁРёСЂРёРЅР° СЌРєСЂР°РЅР°
+const unsigned int HEIGHTSCREEN = yCase * BlockSize; //  Р’С‹СЃРѕС‚Р° СЌРєСЂР°РЅР°
