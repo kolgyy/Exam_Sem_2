@@ -18,7 +18,7 @@ include_directories("ext/SFML/include/")	# добавляем директори
 include_directories("inc/")
 link_directories("ext/SFML/lib/")
 
-add_executable("${PROJECT_NAME}" main.cpp inc/Logger.hpp src/Logger.cpp
+add_executable("${PROJECT_NAME}" main.cpp inc/Logger.hpp inc/Camera.hpp inc/Map.hpp inc/Variables.hpp src/Logger.cpp src/Camera.cpp src/Map.cpp
 		
 	)
 
